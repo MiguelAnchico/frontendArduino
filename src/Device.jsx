@@ -1,6 +1,6 @@
 import { useDevices, useDevicesValues } from './hooks/useDevices';
 import './Device.css';
-import { Nav } from './nav';
+import { Nav } from './Nav';
 
 const keysH = {
 	deviceLabel: 'nodo1',

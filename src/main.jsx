@@ -7,7 +7,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Device } from './device.jsx';
+import { Device } from './Device.jsx';
 
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Device2 } from './Device2.jsx';

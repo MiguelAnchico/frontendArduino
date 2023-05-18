@@ -1,0 +1,44 @@
+.app {
+  width: 100vw;
+  height: 50vh;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-items: center;
+}
+
+.devices {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: space-around;
+}
+
+.devices > .selectDevices {
+  width: 200px;
+  height: 200px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  border-radius: 16px;
+  background-color: #414141;
+
+  text-decoration: none;
+  color: rgb(236, 236, 236);
+
+  cursor: pointer;
+  transition: all 300ms;
+}
+
+.devices > .selectDevices:hover {
+  background-color: #6b6b6b;
+}

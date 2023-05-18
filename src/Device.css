@@ -1,0 +1,37 @@
+.Device {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    padding-top: 32px;
+}
+
+.DeviceVariableSection {
+    width: 100%;
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 32px;
+}
+
+.Device .Card-Variable {
+    width: 200px;
+    height: 200px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    border-radius: 16px;
+    background-color: #414141;
+
+    text-decoration: none;
+    color: rgb(236, 236, 236);
+}

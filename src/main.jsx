@@ -19,8 +19,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 			<BrowserRouter>
 				<Routes>
 					{/*<Route exact path='/' element={<Login />} />*/}
-					<Route path='/home' element={<App />} />
-					<Route path='/home/devices' element={<Device />} />
+					<Route path='/' element={<App />} />
+					<Route path='/devices' element={<Device />} />
 				</Routes>
 			</BrowserRouter>
 			<ReactQueryDevtools />

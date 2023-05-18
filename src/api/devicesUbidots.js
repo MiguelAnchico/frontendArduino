@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API = 'http://industrial.api.ubidots.com/api/v1.6/devices/';
+const API = 'https://industrial.api.ubidots.com/api/v1.6/devices/';
 
 export const getDevicesVar = async ({ deviceLabel, variableLabel, token }) => {
 	const { data } = await axios.get(

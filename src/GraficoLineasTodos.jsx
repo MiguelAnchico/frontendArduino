@@ -54,7 +54,7 @@ export const GraficoLineasTodos = ({ data, type, quantity }) => {
 	
 		})
 
-		if(data[0]) {
+		if(data) {
 			data[0]?.map((value, index) => {
 				if (index < quantity) {
 					filterLabels.push(

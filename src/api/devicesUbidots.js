@@ -44,6 +44,14 @@ export const getDevicesValues = async ({ deviceLabel, token }) => {
 	return data;
 };
 
+export const getAllDevicesValues = async () => {
+	const device1 = await getDevicesValues({deviceLabel: 'nodo1', token: 'BBFF-KS3tuc4mviNZDuyhOHylET4anX9ovs'});
+	const device2 = await getDevicesValues({deviceLabel: 'nodo2', token: 'BBFF-0D4ynbmqBp0ZgNfCGJvG2auPGegCBE'});
+	const device3 = await getDevicesValues({deviceLabel: 'nodo3', token: 'BBFF-fpdppzsRaDqrdNVIOQxdRWkdCdXaMC'});
+
+	return [device1, device2, device3]
+}
+
 export const getAlerts = async () => {
 	const { data: nodo1 } = await axios.get(
 		`${API}nodo1/alerta/values?token=BBFF-xSvQoN1DgmJ4JhL7FUJ15zqwMGBC3U`

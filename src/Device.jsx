@@ -81,7 +81,7 @@ export const Device = () => {
 			</div>
 
 			<h2>Historial de Valores</h2>
-			<table class='table table-success table-striped w-100' id='tabla-datos'>
+			<table class='table' id='tabla-datos'>
 				<thead>
 					<tr>
 						<th scope='col'>Humedad</th>

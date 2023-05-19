@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./App.css";
 
 function App() {
@@ -5,9 +6,9 @@ function App() {
     <div className="app">
       <h1>Selecciona un dispositivo</h1>
       <div className="devices">
-        <a className="selectDevices">Dispositivo 1</a>
-        <a className="selectDevices">Dispositivo 2</a>
-        <a className="selectDevices">Dispositivo 3</a>
+        <Link className="selectDevices" to="/Devices">Dispositivo 1</Link>
+        <Link className="selectDevices" to="/Devices1">Dispositivo 2</Link>
+        <Link className="selectDevices" to="/Devices2">Dispositivo 3</Link>
       </div>
     </div>
   );

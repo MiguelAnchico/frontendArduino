@@ -3,24 +3,24 @@ import './Device.css';
 import { Nav } from './Nav';
 
 const keysH = {
-	deviceLabel: 'nodo1',
+	deviceLabel: 'nodo2',
 	variableLabel: 'humedad',
-	token: 'BBFF-KS3tuc4mviNZDuyhOHylET4anX9ovs',
+	token: 'BBFF-0D4ynbmqBp0ZgNfCGJvG2auPGegCBE',
 };
 
 const keysT = {
-	deviceLabel: 'nodo1',
+	deviceLabel: 'nodo2',
 	variableLabel: 'temperatura',
-	token: 'BBFF-KS3tuc4mviNZDuyhOHylET4anX9ovs',
+	token: 'BBFF-0D4ynbmqBp0ZgNfCGJvG2auPGegCBE',
 };
 
 const keysR = {
-	deviceLabel: 'nodo1',
+	deviceLabel: 'nodo2',
 	variableLabel: 'nivel-de-ruido',
-	token: 'BBFF-KS3tuc4mviNZDuyhOHylET4anX9ovs',
+	token: 'BBFF-0D4ynbmqBp0ZgNfCGJvG2auPGegCBE',
 };
 
-export const Device = () => {
+export const Device2 = () => {
 	const {
 		data: humedad,
 		error: errorHumedad,
@@ -66,7 +66,7 @@ export const Device = () => {
 	return (
 		<div className='Device'>
 			<Nav />
-			<h1>Dispositivo 1</h1>
+			<h1>Dispositivo 2</h1>
 			<h2>Estadisticas</h2>
 			<div className='DeviceVariableSection'>
 				<div className='Card-Variable'>
@@ -84,7 +84,7 @@ export const Device = () => {
 			</div>
 
 			<h2>Historial de Valores</h2>
-			<table class='table' id='tabla-datos'>
+			<table class='table table-success table-striped w-100' id='tabla-datos'>
 				<thead>
 					<tr>
 						<th scope='col'>Humedad</th>

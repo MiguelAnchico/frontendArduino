@@ -54,14 +54,17 @@ export const GraficoLineasTodos = ({ data, type, quantity }) => {
 	
 		})
 
-		data[0]?.map((value, index) => {
-			if (index < quantity) {
-				filterLabels.push(
-					value['tiempo'].toLocaleString('es-CO', { timeZone: 'UTC' })
-				);
-			}
-		});
-
+		if(data[0]) {
+			data[0]?.map((value, index) => {
+				if (index < quantity) {
+					filterLabels.push(
+						value['tiempo'].toLocaleString('es-CO', { timeZone: 'UTC' })
+					);
+				}
+			});
+	
+		}
+		
 		
 		setValues1(filterValues[0].reverse());
 		setValues2(filterValues[1].reverse());

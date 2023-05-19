@@ -1,106 +1,121 @@
-import { useDevices, useDevicesValues } from './hooks/useDevices';
+import { useAlerts, useDevices, useDevicesValues } from './hooks/useDevices';
 import './Device.css';
 import { Nav } from './Nav';
-
-const keysH = {
-	deviceLabel: 'nodo1',
-	variableLabel: 'humedad',
-	token: 'BBFF-KS3tuc4mviNZDuyhOHylET4anX9ovs',
-};
-
-const keysT = {
-	deviceLabel: 'nodo1',
-	variableLabel: 'temperatura',
-	token: 'BBFF-KS3tuc4mviNZDuyhOHylET4anX9ovs',
-};
-
-const keysR = {
-	deviceLabel: 'nodo1',
-	variableLabel: 'nivel-de-ruido',
-	token: 'BBFF-KS3tuc4mviNZDuyhOHylET4anX9ovs',
-};
+import { useParams, useSearchParams } from 'react-router-dom';
+import { GraficoLineas } from './GraficoLineas';
+import { useEffect, useState } from 'react';
 
 export const Device = () => {
-	const {
-		data: humedad,
-		error: errorHumedad,
-		isLoading: isLoadingHumedad,
-		isFetching: isFetchingHumedad,
-	} = useDevices(keysH);
+	const [params] = useSearchParams();
+	const { id } = useParams();
+
+	const deviceLabel = params.get('deviceLabel');
+	const tokenNode = params.get('tokenNode');
+
+	const [counter, setCounter] = useState(10);
 
 	const {
-		data: temperatura,
-		error: errorTemperatura,
-		isLoading: isLoadingTemperatura,
-		isFetching: isFetchingTemperatura,
-	} = useDevices(keysT);
+		data: lastValues,
+		error: errorLastValues,
+		isLoading: isLoadingLastValues,
+		isFetching: isFetchingLastValues,
+	} = useDevices({ deviceLabel: deviceLabel, token: tokenNode });
 
 	const {
-		data: ruido,
-		error: errorRuido,
-		isLoading: isLoadingRuido,
-		isFetching: isFetchingRuido,
-	} = useDevices(keysR);
+		data: historicalData,
+		error: errorHistoricalData,
+		isLoading: isLoadingHistoricalData,
+		isFetching: isFetchingHistoricalData,
+	} = useDevicesValues({ deviceLabel: deviceLabel, token: tokenNode });
 
-	const {
-		data: valuesHumedad,
-		error: errorValuesHumedad,
-		isLoading: isLoadingValuesHumedad,
-		isFetching: isFetchingValuesHumedad,
-	} = useDevicesValues(keysH);
+	useEffect(() => {
+		if (historicalData?.length < 10) {
+			setCounter(historicalData?.length);
+		}
+	}, [historicalData]);
 
-	const {
-		data: valuesTemperatura,
-		error: errorValuesTemperatura,
-		isLoading: isLoadingValuesTemperatura,
-		isFetching: isFetchingValuesTemperatura,
-	} = useDevicesValues(keysT);
+	const handleDecrement = () => {
+		if (counter > 10) {
+			setCounter(counter - 1);
+		}
+	};
 
-	const {
-		data: valuesRuido,
-		error: errorValuesRuido,
-		isLoading: isLoadingValuesRuido,
-		isFetching: isFetchingValuesRuido,
-	} = useDevicesValues(keysR);
+	const handleIncrement = () => {
+		if (counter < historicalData.length) {
+			setCounter(counter + 1);
+		}
+	};
 
 	return (
 		<div className='Device'>
 			<Nav />
-			<h1>Dispositivo 1</h1>
-			<h2>Estadisticas</h2>
+			<h1>Dispositivo {id}</h1>
+			<h2>Ultimos valores</h2>
 			<div className='DeviceVariableSection'>
 				<div className='Card-Variable'>
 					<h3>Humedad</h3>
-					<p>{humedad}</p>
+					<p>{lastValues?.humedad}</p>
 				</div>
 				<div className='Card-Variable'>
 					<h3>Temperatura</h3>
-					<p>{temperatura}</p>
+					<p>{lastValues?.temperatura}</p>
 				</div>
 				<div className='Card-Variable'>
 					<h3>Nivel de Ruido</h3>
-					<p>{ruido}</p>
+					<p>{lastValues?.ruido}</p>
+				</div>
+			</div>
+			<h2>Graficos con los ultimos {counter} valores</h2>
+			<div className='buttonCounter'>
+				<button onClick={() => handleDecrement()}>Decrementar</button>
+				<button onClick={() => handleIncrement()}>Aumentar</button>
+			</div>
+			<div className='Graficos'>
+				<div>
+					<GraficoLineas
+						data={historicalData}
+						type='humedad'
+						title='Humedad'
+						quantity={counter}
+					/>
+				</div>
+
+				<div>
+					<GraficoLineas
+						data={historicalData}
+						type='temperatura'
+						title='Temperatura'
+						quantity={counter}
+					/>
+				</div>
+				<div>
+					<GraficoLineas
+						data={historicalData}
+						type='ruido'
+						title='Nivel de Ruido'
+						quantity={counter}
+					/>
 				</div>
 			</div>
 
 			<h2>Historial de Valores</h2>
-			<table class='table' id='tabla-datos'>
+			<table className='table' id='tabla-datos'>
 				<thead>
 					<tr>
 						<th scope='col'>Humedad</th>
 						<th scope='col'>Temperatura</th>
 						<th scope='col'>Nivel de Ruido</th>
+						<th scope='col'>Fecha</th>
 					</tr>
 				</thead>
 				<tbody>
-					{valuesHumedad?.results?.map(({ value, timestamp }, index) => (
-						<tr>
-							<td key={timestamp}>{value}</td>
-							<td key={valuesTemperatura?.results[index]?.timestamp}>
-								{valuesTemperatura?.results[index]?.value}
-							</td>
-							<td key={valuesRuido?.results[index]?.timestamp}>
-								{valuesRuido?.results[index]?.value}
+					{historicalData?.map((data) => (
+						<tr key={data.tiempo.toLocaleString('es-CO', { timeZone: 'UTC' })}>
+							<td>{data.humedad}</td>
+							<td>{data.temperatura}</td>
+							<td>{data.ruido}</td>
+							<td>
+								{data.tiempo.toLocaleString('es-CO', { timeZone: 'UTC' })}
 							</td>
 						</tr>
 					))}

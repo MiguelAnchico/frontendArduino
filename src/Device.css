@@ -39,3 +39,34 @@
 .table {
     width: 100%;
 }
+
+td {
+    text-align: center;
+}
+
+.Device .Graficos {
+    display: flex;
+    flex-wrap: wrap;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+
+    margin: 32px;
+}
+
+.Device .Graficos div {
+    min-width: 400px;
+    max-width: 600px;
+    width: 100%;
+    height: auto;
+}
+
+.buttonCounter {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+    width: 300px;
+}
